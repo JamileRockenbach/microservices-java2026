@@ -1,6 +1,6 @@
 package br.edu.atitus.greetingservice.controllers;
 
-import br.edu.atitus.greetingservice.configs.GreetingConfig;
+import br.edu.atitus.greetingservice.config.GreetingConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 

@@ -22,7 +22,7 @@ Este projeto é um microserviço desenvolvido em *Java* com o framework *Spring 
 
 ---
 
-### ## 📚 Tecnologias Utilizadas
+### 📚 Tecnologias Utilizadas
 
 * Java 17
 * Spring Boot

@@ -2,10 +2,7 @@ package br.edu.atitus.greetingservice.controllers;
 
 import br.edu.atitus.greetingservice.configs.GreetingConfig;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/greeting")
@@ -19,40 +16,29 @@ public class GreetingController {
 
     private final GreetingConfig config;
 
+    //Injeção de Dependência:
     public GreetingController(GreetingConfig config) {
         this.config = config;
     }
 
     @GetMapping({"", "/"})
     public String getGreeting(@RequestParam(required = false) String name) {
-        if (name == null || name.isEmpty()) {
-            name = config.getDefaultName();
-        }
-        return String.format("%s %s!!!", config.getGreeting(), name);
+        return processGreeting(name);
     }
-
-    @GetMapping("/{name}")
+    @GetMapping({"/{name}"})
     public String getGreetingPath(@PathVariable String name) {
-        return String.format("%s %s!!!", config.getGreeting(), name);
+        return processGreeting(name);
     }
 
     @PostMapping
-    public String postGreeting(@RequestBody GreetingRequest request) {
-        String name = (request.getName() == null || request.getName().isEmpty())
-                ? config.getDefaultName()
-                : request.getName();
-        return String.format("%s %s!!!", config.getGreeting(), name);
-    }
-}
-
-class GreetingRequest {
-    private String name;
-
-    public String getName() {
-        return name;
+    public String postGreeting(@RequestBody NameRequest request){
+        return processGreeting(request.getName());
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private String processGreeting(String name){
+        if (name == null || name.isEmpty()){
+            name = config.getDefaultName();
+        }
+        return String.format("%s %s!!!", config.getGreeting(),name);
     }
 }

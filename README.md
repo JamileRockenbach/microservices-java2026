@@ -1,32 +1,38 @@
-# Microservices - Greeting Service em Java 💻🌐
+# Microservices Java - Sistema e Produtos  💻🌐
 
-Este projeto é um microserviço desenvolvido em *Java* com o framework *Spring Boot* como parte da disciplina de Paradigmas de Linguagem de Programação no curso de Ciência da Computação. O objetivo é demonstrar o uso de perfis de configuração (Spring Profiles), injeção de dependência e criação de endpoints REST (GET e POST).
-✨️ Desenvolvido por: *Jamile Rockenbach Ferreira* - *RA: 1137704*.
-
----
-
-### 🚀 Funcionalidades Implementadas
-
-* *Configuração por Profiles:* Suporte para múltiplos idiomas (Inglês, Espanhol e Italiano) via arquivos .properties.
-* *PathVariable:* Endpoint GET que recebe parâmetros diretamente na URL.
-* *Requisição POST:* Endpoint que processa corpos de requisição em formato JSON.
-* *Centralização de Configurações:* Uso de @ConfigurationProperties para mapear propriedades do sistema.
+Este repositório contém uma arquitetura de microsserviços desenvolvida em **Java** com **Spring Boot**, focada em serviços de saudação, configuração centralizada, conversão de moeda e gerenciamento de produtos.
+✨️ Desenvolvido por: Jamile Rockenbach Ferreira - RA: 1137704
 
 ---
 
-### 🛠️ Estrutura do Projeto
+## 🏗️ Estrutura do Repositório
 
-* GreetingConfig.java: Classe responsável por carregar as propriedades do arquivo application.properties.
-* GreetingController.java: Controlador REST que gerencia as rotas de saudação.
-* resources/: Contém os arquivos de configuração para cada idioma (application-en.properties, application-es.properties, application-it.properties).
+O projeto está dividido nos seguintes serviços:
+
+### 1. `config-service`
+Servidor de configuração centralizada para os demais microsserviços da arquitetura.
+
+### 2. `greeting-service`
+Serviço de saudação com suporte a internacionalização (**Spring Profiles**).
+* **Endpoints:** * `GET /greeting/{name}`
+    * `POST /greeting` (Recebe JSON `{"name": "..."}`)
+
+### 3. `currency-service`
+Microsserviço responsável pela lógica de conversão de moedas e cotações.
+
+### 4. `product-service`
+Gerenciamento de catálogo de produtos com integração a banco de dados e suporte a moedas estrangeiras.
+* **Tecnologias:** Spring Data JPA, PostgreSQL e Flyway.
+* **Endpoint:** `GET /products/{id}?targetCurrency=XXX`
 
 ---
 
-### 📚 Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
-* Java 17
-* Spring Boot
-* Maven
-* IntelliJ IDEA
+* **Linguagem:** Java 17
+* **Framework:** Spring Boot 3.x
+* **Banco de Dados:** PostgreSQL
+* **Migrações:** Flyway
+* **Documentação/Testes:** Postman
 
 ---
